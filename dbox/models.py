@@ -3,8 +3,6 @@ from django.utils import timezone
 
 # Create your models here.
 
-<<<<<<< HEAD
-=======
 class Doctor(models.Model):
     id = models.IntegerField(primary_key = True)
     first_name = models.CharField(max_length = 30, null = False)
@@ -23,9 +21,9 @@ class Patient(models.Model):
     email = models.EmailField() 
     contact_no = models.CharField(max_length = 10)
     age = models.IntegerField()
-    gender = models.CharField()
+    gender = models.CharField(max_length = 10)
     address = models.TextField()
-    doc_id = models.ForeignKey('Doctor')
+    doc_id = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True)
 
     def _str_(self):
         return str(self.id)
@@ -33,7 +31,7 @@ class Patient(models.Model):
 class PressureReading(models.Model):
     id =  models.IntegerField(primary_key=True)
     mean_pressure = models.FloatField()
-    hand = models.CharField()
+    hand = models.CharField(max_length=10)
     type_of_reading = models.IntegerField()
 
     def publish(self):
@@ -41,4 +39,4 @@ class PressureReading(models.Model):
         self.save()
 
 
->>>>>>> 51c5ffa43385c5bb2139ab2239e93533cda615a1
+
