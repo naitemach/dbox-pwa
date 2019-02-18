@@ -1,9 +1,11 @@
 {% load static %}
+{% load pwa %}
 <html lang="en">
 	<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>
+    {% progressive_web_app_meta %}
+    <title>Signup</title>
 
 		<link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
     
@@ -30,12 +32,12 @@
   		<h1 class="h1 mb-3 font-weight-strong" style="color:#1e90ff">D-BOX</h1>
   		<h1 class="h4 mb-3 font-weight-normal">Signup</h1>
       <div class="form-label-group">
-        <label for="inputName" class="sr-only">First name</label>
-        <input type="text" id="inputName" name="first_name" lass="form-control" placeholder="Name" required="" autofocus="">
+        <label for="inputfName" class="sr-only">First name</label>
+        <input type="text" id="inputfName" name="first_name" class="form-control" placeholder="First name" required="" autofocus="">
       </div>
       <div class="form-label-group">
-        <label for="inputName" class="sr-only">Last name</label>
-        <input type="text" id="inputName" name="last_name" class="form-control" placeholder="Name" required="" autofocus="">
+        <label for="inputlName" class="sr-only">Last name</label>
+        <input type="text" id="inputlName" name="last_name" class="form-control" placeholder="Last name" required="">
       </div>
       <div class="form-label-group">
   		  <label for="inputEmail" class="sr-only">Email</label>
@@ -45,10 +47,10 @@
         <label for="inputPassword" class="sr-only">Password</label>
   		  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
   		</div>
-      <div class="form-label-group">
+<!--       <div class="form-label-group">
         <label for="inputRePassword" class="sr-only">Re-enter Password</label>
         <input type="password" id="inputRePassword" class="form-control" placeholder="Re-enter Password" required="">
-      </div>
+      </div> -->
       <div class="checkbox mb-3">
     		<label>
       		<input type="checkbox" value="remember-me"> I agree to the <a href="">terms and conditions</a>. 

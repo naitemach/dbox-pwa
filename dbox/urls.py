@@ -9,6 +9,9 @@ urlpatterns = [
     path('signup', views.signup, name='signup'),
     path('home', views.home, name='home'),
     path('patient', views.patient, name='patient'),
-    path('test', views.test, name='test' )
+    path('test', views.test, name='test' ),
+    path('searchpat', views.searchpat, name='searchpat' ),
+    path('addpat', views.addpat, name='addpat' ),
+
 
 ]

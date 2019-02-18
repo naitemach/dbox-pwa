@@ -4,7 +4,6 @@ from django.utils import timezone
 # Create your models here.
 
 class Doctor(models.Model):
-    id = models.IntegerField(primary_key = True)
     first_name = models.CharField(max_length = 30, null = False)
     last_name = models.CharField(max_length = 30, null = True)
     email = models.EmailField()
@@ -15,7 +14,6 @@ class Doctor(models.Model):
 
 
 class Patient(models.Model):
-    id = models.IntegerField(primary_key = True)
     first_name = models.CharField(max_length = 30, null = False)
     last_name = models.CharField(max_length = 30, null = True)
     email = models.EmailField() 
@@ -23,13 +21,12 @@ class Patient(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length = 10)
     address = models.TextField()
-    doc_id = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True)
+    doc = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True)
 
     def _str_(self):
         return str(self.id)
 
 class PressureReading(models.Model):
-    id =  models.IntegerField(primary_key=True)
     mean_pressure = models.FloatField()
     hand = models.CharField(max_length=10)
     type_of_reading = models.IntegerField()

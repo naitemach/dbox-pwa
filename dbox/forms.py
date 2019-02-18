@@ -12,16 +12,18 @@ class SignupForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 class AddpatForm(forms.Form):
-    first_name = forms.CharField(label='first_name', max_length=30)
-    last_name = forms.CharField(label='last_name', max_length=30)
-    email = forms.EmailField(label='email', max_length=100)
-    password = forms.CharField(widget=forms.PasswordInput)
-    address = forms.CharField(label='address',widget=forms.Textarea)
-    age  = forms.CharField(label='age')
-    city = forms.CharField()
-    state = forms.CharField()
-    zip_code = forms.IntegerField(label='zip_code')
-    mobile = forms.IntegerField(label='mobile')
+    first_name = forms.CharField(label='First name', max_length=30)
+    last_name = forms.CharField(label='Last name', max_length=30)
+    email = forms.EmailField(label='Email', max_length=100)
+    address = forms.CharField(label='Address',widget=forms.Textarea)
+    age  = forms.IntegerField(label='Age')
+    gender = forms.CharField(label='Gender',max_length=10)
+    contact_no= forms.CharField(label='Contact no',max_length=10)
+
+class SearchpatForm(forms.Form):
+    first_name = forms.CharField(label='First name', max_length=30,required=False)
+    mobile = forms.CharField(label='Phone number', max_length=10,required=False)
+
 
 # class ProdRegistration(forms.Form):
 #     category = forms.CharField(label='category')

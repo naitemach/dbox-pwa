@@ -16,6 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'dbox/static/js', 'serviceworker.js')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -25,9 +27,20 @@ SECRET_KEY = 'ah#kq)zzfl48pcom5ddvr@4=y%raf9ut1^3fv*$f0c$2wh8)f8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.43.43','192.168.43.42','127.0.0.1']
 
-
+PWA_APP_NAME = 'Dbox'
+PWA_APP_DESCRIPTION = "App for doctors"
+PWA_APP_THEME_COLOR = '#1e90ff'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_START_URL = '/'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/icon.png',
+        'sizes': '160x160'
+    }
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dbox',
+    'pwa',
+    'sslserver',
 ]
 
 MIDDLEWARE = [

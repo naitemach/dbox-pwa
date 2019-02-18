@@ -1,0 +1,277 @@
+{% load static %}
+{% load pwa %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% progressive_web_app_meta %}
+    <title>Home</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      body {
+  min-height: 75rem;
+}
+      .navbar-header {
+        float: left;
+        margin: 0px;
+        text-align: center;
+        width: 100%;
+      }
+    .navbar-nav {
+    width: 100%;
+    text-align: center;
+  }
+ 
+    </style>
+    <script type="text/javascript">
+      var mssg = "{{mssg}}";
+      if(mssg){
+        alert(mssg);;
+      }
+    </script>
+   
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1e90ff">
+        <div class="navbar-header">
+          <h6 style="color:white;margin:0px; font-size: 22px;">D-BOX</h6>        
+        </div>
+    </nav>
+
+<!--   <a class="navbar-brand" href="#">Top navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+<!--   <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div> -->
+
+
+    <main role="main" class="container" style="padding-top: 60px;padding-bottom: 50px">
+      <h6 class="text-muted mb-0">welcome, {{ first_name }}</h6>
+      <p class="mb-3"><span class="text-muted">you are here: </span><a href="{% url 'home' %}">Home </a></p>
+      <div class="jumbotron pt-3 pb-3 mb-3">
+        <h4 class="text-muted" style="text-align: center;">Existing patient</h4>
+        <div class="row">
+        <div class="col-md-4 order-md-2 mb-2">
+          <h5 class="d-flex justify-content-between align-items-center" style="padding-right: 10px;">
+            <span class="text-muted" style="padding-left: 10px;">Total Patients</span>
+            <span class="badge badge-secondary badge-pill" >{{ count }}</span>
+          </h5>
+        </div>
+        </div>
+        <div class="col-md-8 order-md-1">
+        <form action="{% url 'searchpat' %}" method="post" id="searchpat">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">First name</label>
+              <input type="text" class="form-control" name="first_name" id="firstName" placeholder="" value="" >
+              <div class="invalid-feedback">Valid first name is required.</div>
+            </div>
+            <div style="text-align: center;width:100%;"><strong>or</strong></div>
+            <div class="col-md-6 mb-3">
+              <label for="phone">Phone number</label>
+              <input type="text" class="form-control" name="mobile" id="phone" placeholder="" value="" >
+              <div class="invalid-feedback">Valid last name is required.</div>
+            </div>
+          </div>
+
+         <!--  <div class="mb-3">
+            <label for="email">Email <span class="text-muted">(Optional)</span></label>
+            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+            <div class="invalid-feedback">Please enter your address.2</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+        </div> -->
+
+    <!--     <div class="row">
+ 
+          <div class="col-md-4 mb-3">
+            <label for="state">State</label>
+            <select class="custom-select d-block w-100" id="state" required>
+              <option value="">Choose...</option>
+              <option>California</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="zip">Zip</label>
+            <input type="text" class="form-control" id="zip" placeholder="" required>
+            <div class="invalid-feedback">
+              Zip code required.
+            </div>
+          </div>
+        </div> -->
+    <!--     <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="save-info">
+          <label class="custom-control-label">Launch dashboard</label>
+        </div> -->
+
+    <div class="container" style="text-align: center;">
+<!--     <a class="btn btn-lg btn-primary" href="/docs/4.2/components/navbar/" style="display:inline-block;" role="button">Submit &raquo;</a> -->
+<button class="btn btn-md btn-primary" style="background-color: #1e90ff;display:inline-block;" type="submit">Submit &raquo;</button>
+    </div>
+  </form>
+  </div>
+</div>
+      <div class="jumbotron pt-3 pb-3 mb-5">
+        <h4 class="text-muted" style="text-align: center;">Add new patient</h4>
+<!--         <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Patient ID</span>
+            <span class="badge badge-secondary badge-pill">12</span>
+          </h4>
+        </div>
+        </div> -->
+        <div class="col-md-8 order-md-1">
+        <form action="{% url 'addpat' %}" method="post" id="addpat">
+          {% csrf_token %}
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">First name</label>
+              <input type="text" name="first_name" class="form-control" id="firstName" placeholder="" value="" required>
+              <div class="invalid-feedback">Valid first name is required.</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Last name</label>
+              <input type="text" name="last_name" class="form-control" id="lastName" placeholder="" value="" required>
+              <div class="invalid-feedback">Valid last name is required.</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="address">Address</label>
+            <input type="text" name="address" class="form-control" id="address" placeholder="" required>
+            <div class="invalid-feedback">Please enter the Address.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="age">Age</label>
+          <input type="number" class="form-control" name="age" id="age" placeholder="">
+        </div>
+
+        <div class="row">
+  <!--         <div class="col-md-5 mb-3">
+            <label for="country">Country</label>
+            <select class="custom-select D-BOXlock w-100" id="country" required>
+              <option value="">Choose...</option>
+              <option>United States</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div> -->
+          
+          <div class="col-md-4 mb-3">
+            <label for="gender">Gender</label>
+            <select class="custom-select d-block w-100" name="gender" id="gender" required>
+              <option value="">Choose...</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+            <div class="invalid-feedback">
+              Please mention the gender.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="contact_no">Contact no</label>
+            <input type="text" name="contact_no" class="form-control" id="contact_no" placeholder="" required>
+            <div class="invalid-feedback">
+              please enter the contact number.
+            </div>
+          </div>
+        </div>
+<!--         <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="save-info">
+          <label class="custom-control-label">Launch dashboard</label>
+        </div>
+        <hr class="mb-4"> -->
+    <div class="container" style="text-align: center;">
+    <!-- <a class="btn btn-lg btn-primary" href="/docs/4.2/components/navbar/" style="display:inline-block;" role="button">Submit &raquo;</a> -->
+    <button class="btn btn-md btn-primary" style="background-color: #1e90ff;display:inline-block;" type="submit">Submit &raquo;</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+</main>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-bottom" style="padding:0px;">
+<div class="container" style="width:100%;height:5px; background-color: white;"></div>
+<div class="navbar-nav" style="background-color: #1e90ff; " >
+
+  <div class="text-center mb-2 mt-2" style="width:100%;">
+   
+  <div class="row"  style="display: inline-block; width:315px; padding:0px;">
+    <div class="col-sm" style="text-align: center; width:105px; height:27px;  display:inline;">
+      <a href="" style="color:white;   ">Settings</a>
+    </div>
+    <div class="col-sm" style="text-align: center; width:105px; height:27px;  display:inline;">
+       <a href="" style="color:white;    ">Support</a>
+    </div>
+    <div class="col-sm" style="text-align: center; width:105px; height:27px; display:inline;">
+       <a href="{% url 'login' %}" style="color:white;  ">Signout</a>
+    </div>
+  </div>
+
+</div>
+ <!--   <div class="text-muted text-center text-small"  >
+    <p class="mb-1" style="color:#ADD8E6;">&copy; 18-19 D-BOX, CSD, NITK Surathkal</p>
+  </div> -->
+</div>
+</nav>
+
+<script src="{% static 'jquery-3.3.1.slim.min.js' %}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script> -->
+<script src="{% static 'bootstrap.bundle.min.js' %}" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+</body>
+</html>
