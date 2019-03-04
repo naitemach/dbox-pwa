@@ -70,7 +70,8 @@
 
 
     <main role="main" class="container" style="padding-top: 60px;padding-bottom: 50px">
- <p><span class="text-muted">you are here: </span><a href="{% url 'home' %}">Home </a>&raquo;<a href="{% url 'patient' %}"> Patient-{{ pat.first_name }} </a></p>
+    <h6 class="text-muted mb-0">welcome, {{ first_name }}</h6>
+ <p class="mb-3"><span class="text-muted">you are here: </span><a href="{% url 'home' %}">Home </a>&raquo;<a href="{% url 'patient' %}"> Patient-{{ pat.first_name }} </a></p>
       
           <div class="jumbotron pt-3 pb-3 mb-3">
         <!-- <h4 style="text-align: center;">Patient Info</h4> -->
@@ -127,39 +128,44 @@
 
 
 
-
+<!-- 
 <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-0 mb-0 border-bottom">
         <h1 class="h5">Recovery Graph</h1>
       </div>
 
       <canvas class="mb-4 mt-3 w-100 chartjs-render-monitor" id="hrChart" width="726" height="306" style="display: block; width: 363px; height: 153px;"></canvas>
-
+ -->
 
 
       <div class="jumbotron mb-3 py-3" >
         <h4 style="text-align: center;">Test</h4>
         <div class="col-md-8 order-md-1">
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" action="{% url 'test' %}" novalidate>
         <div class="row">
           <div class="col-md-4 mb-3">
             <label for="selTest">Select type</label>
             <select class="custom-select d-block w-100" id="state" required>
               <option value="">Choose...</option>
-              <option>Type 1</option>
+              <option>Grip test</option>
             </select>
             <div class="invalid-feedback">
               Please select a test.
             </div>
           </div>
         </div>
-    <div class="container">
+<!--     <div class="container">
       <div class="row">
-        <div class="col-xs-6 ml-3">    <a class="btn btn-md btn-primary" href="/docs/4.2/components/navbar/" style="display:inline-block;" role="button">Test Now &raquo;</a></div>
+        <div class="col-xs-6 ml-3">    <button class="btn btn-md btn-primary" href="/docs/4.2/components/navbar/" style="display:inline-block;" role="button" type="submit">Test Now &raquo;</button></div>
         <div class="col-xs-6 ml-3">    <a class="btn btn-md btn-primary" href="/docs/4.2/components/navbar/" style="display:inline-block;" role="button">Test History&raquo;</a></div>
 
       </div>
 
+    </div> -->
+
+    <div class="container" style="text-align: center;">
+<!--     <a class="btn btn-lg btn-primary" href="/docs/4.2/components/navbar/" style="display:inline-block;" role="button">Submit &raquo;</a> -->
+<button class="btn btn-md btn-primary" style="background-color: #1e90ff;display:inline-block;" type="submit">Test Now &raquo;</button>
     </div>
   </form>
   </div>

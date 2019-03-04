@@ -12,6 +12,8 @@ urlpatterns = [
     path('test', views.test, name='test' ),
     path('searchpat', views.searchpat, name='searchpat' ),
     path('addpat', views.addpat, name='addpat' ),
-
+    path('getPressure', views.getPressure, name = 'getPressure'),
+    path('storePressure',views.storePressure, name = 'storePressure'),
+    path('changeReading',views.changeReading, name = "changeReading")
 
 ]

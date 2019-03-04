@@ -1,10 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from .forms import LoginForm, SignupForm, AddpatForm, SearchpatForm
 from .models import *
 from django.db import connection
 from collections import Counter
 from django.utils import timezone
+from django.forms.models import model_to_dict
+import datetime
+import random
+import numpy as np
+import json
 
 def login(request):
 	if request.method == 'POST':
@@ -43,6 +48,7 @@ def signup(request):
 			obj.save()
 			request.session['first_name'] = first_name
 			request.session['id'] = obj.id
+			count = Patient.objects.all().count()
 			return render(request,'dbox/home.html',{'first_name': request.session['first_name'], 'id' : request.session['id'], 'count' : count, 'mssg' : '' })	
 	else:		
 		return render(request,'dbox/signup.html',{})
@@ -81,6 +87,7 @@ def searchpat(request):
 			else:
 				pat_obj = Patient.objects.get(contact_no = mobile) 
 			if pat_obj:
+				request.session['pat'] = pat_obj.id
 				first_name = pat_obj.first_name
 				last_name = pat_obj.last_name
 				age = pat_obj.age
@@ -88,15 +95,54 @@ def searchpat(request):
 				address = pat_obj.address
 				contact_no = pat_obj.contact_no
 				#return render(request,'dbox/patient.html',{'first_name':first_name, 'last_name': last_name, 'age': age,'gender': gender,'address': address,'contact_no': contact_no})				
-				
 				return render(request,'dbox/patient.html',{'pat':pat_obj})				
 			else:
 				print("Patient not found!")
 				return render(request,'dbox/home.html',{})
 							
 def patient(request):
-	return render(request,'dbox/patient.html',{})
+	pat_obj = Patient.objects.get(id=request.session['pat']) 
+	return render(request,'dbox/patient.html',{'pat':pat_obj})
 
 def test(request):
-	return render(request,'dbox/test.html',{})
+	pat_obj = Patient.objects.get(id=request.session['pat'])
+	try:
+		lhr =(list(PressureReading.objects.filter(pat_id = request.session['pat'] , hand="left", type_of_reading = "F23").values('id','pat_id_id','mean_pressure','hand','type_of_reading','time')))
+		print(lhr)
+	except PressureReading.DoesNotExist:
+		lhr = []
+	try:
+		rhr = list(PressureReading.objects.filter(pat_id = request.session['pat'] , hand="right" , type_of_reading = "F23" ).values()) 
+	except PressureReading.DoesNotExist:
+		rhr = []
+	return render(request,'dbox/test.html',{'pat' : pat_obj, 'lhr':lhr, 'rhr':rhr,'first_name': request.session['first_name'], 'id' : request.session['id']})
+
+def changeReading(request):
+	data = dict()
+	tor = request.GET.get('slct',None)
+	try:
+		lhr = list(PressureReading.objects.filter(pat_id = request.session['pat'] , hand="left", type_of_reading = tor).values())	
+	except PressureReading.DoesNotExist:
+		lhr = []
+	try:
+		rhr = list(PressureReading.objects.filter(pat_id = request.session['pat'] , hand="right" , type_of_reading = tor ).values()) 
+	except PressureReading.DoesNotExist:
+		rhr = []
+	data['lhr'] = lhr
+	data['rhr'] = rhr
+	return JsonResponse(data)
+
+def getPressure(request):
+	data = dict()
+	data['pressure'] = random.randint(1,1024)
+	return JsonResponse(data)
+
+def storePressure(request):
+	data = dict()
+	pat_id = request.GET.get('id',None)
+	p = PressureReading.objects.create(pat_id = Patient.objects.get(id = pat_id), mean_pressure = request.GET.get('mean',None), hand = request.GET.get('side',None), type_of_reading =request.GET.get('type',None), time=request.GET.get('time',None) )
+	p.save()
+	print(p)
+	return JsonResponse(data)
+
 

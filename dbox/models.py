@@ -27,9 +27,11 @@ class Patient(models.Model):
         return str(self.id)
 
 class PressureReading(models.Model):
+    pat_id = models.ForeignKey('Patient', on_delete=models.CASCADE, null = False)
     mean_pressure = models.FloatField()
     hand = models.CharField(max_length=10)
-    type_of_reading = models.IntegerField()
+    type_of_reading = models.CharField(max_length = 30)
+    time = models.CharField(max_length = 30)
 
     def publish(self):
         self.created_date = timezone.now()
